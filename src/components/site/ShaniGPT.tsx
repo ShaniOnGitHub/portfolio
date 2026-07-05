@@ -25,15 +25,14 @@ const CHIPS = [
 ];
 
 // ─── Cosine similarity ────────────────────────────────────────────────────────
+// Since vectors inside index and query vectors are both normalized at creation time,
+// cosine similarity is mathematically equivalent to the dot product.
 function cosineSimilarity(a: number[], b: number[]): number {
-  let dot = 0, normA = 0, normB = 0;
+  let dot = 0;
   for (let i = 0; i < a.length; i++) {
     dot += a[i] * b[i];
-    normA += a[i] * a[i];
-    normB += b[i] * b[i];
   }
-  if (normA === 0 || normB === 0) return 0;
-  return dot / (Math.sqrt(normA) * Math.sqrt(normB));
+  return dot;
 }
 
 // ─── Module-level singletons (persist across renders) ─────────────────────────
@@ -43,7 +42,13 @@ let _index: KnowledgeChunk[] | null = null;
 async function getExtractor() {
   if (_extractor) return _extractor;
   // Dynamic import so the heavy library is only loaded when the user interacts
-  const { pipeline } = await import("@xenova/transformers");
+  const { pipeline, env } = await import("@xenova/transformers");
+  
+  // Speed up model loading on serverless hosting like Vercel:
+  // Disable local model paths to bypass checking for files on Vercel's serverless routes,
+  // which prevents slow, redundant 404 responses.
+  env.allowLocalModels = false;
+  
   _extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2") as typeof _extractor;
   return _extractor!;
 }
@@ -122,13 +127,15 @@ export function ShaniGPT() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [searching, setSearching] = useState(false);
   const [modelState, setModelState] = useState<ModelState>("idle");
+  const [showLoader, setShowLoader] = useState(false);
   const logRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, searching]);
 
-  async function warmUp() {
+  async function warmUp(silent = true) {
+    if (!silent) setShowLoader(true);
     if (modelState !== "idle") return;
     setModelState("loading");
     try {
@@ -138,6 +145,24 @@ export function ShaniGPT() {
       setModelState("error");
     }
   }
+
+  // Preload the model on browser idle time (1.5 seconds after landing)
+  // This downloads and caches the model silently in the background, making
+  // subsequent user queries instantaneous.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (typeof window !== "undefined") {
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(() => {
+            warmUp(true);
+          });
+        } else {
+          warmUp(true);
+        }
+      }
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   async function send(text: string) {
     const q = text.trim();
@@ -158,9 +183,11 @@ export function ShaniGPT() {
       return;
     }
 
-    // Warm up on first interaction
+    // Trigger loader visibility and model warm up if not ready
+    setShowLoader(true);
     if (modelState === "idle" || modelState === "loading") {
       setModelState("loading");
+      warmUp(false);
     }
     setSearching(true);
 
@@ -214,7 +241,7 @@ export function ShaniGPT() {
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onFocus={warmUp}
+          onFocus={() => warmUp(false)}
           placeholder="Ask me anything about Shani..."
           className="mono flex-1 bg-transparent px-3 text-sm outline-none placeholder:text-muted-foreground/70"
         />
@@ -229,7 +256,7 @@ export function ShaniGPT() {
       </form>
 
       {/* Model loading banner */}
-      {modelState === "loading" && !searching && (
+      {modelState === "loading" && !searching && showLoader && (
         <p className="mono mt-3 text-center text-xs text-muted-foreground/60 animate-pulse">
           Loading ShaniGPT… (first-time model download, cached after this)
         </p>
