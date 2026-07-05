@@ -136,7 +136,7 @@ async function main() {
   });
 
   console.log("🤖 Loading Xenova/all-MiniLM-L6-v2...");
-  const extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2");
+  const extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { quantized: true });
   console.log("✅ Model ready\n");
 
   const texts = pairs.map(p => `${p.question} ${p.answer}`);

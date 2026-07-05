@@ -48,8 +48,19 @@ async function getExtractor() {
   // Disable local model paths to bypass checking for files on Vercel's serverless routes,
   // which prevents slow, redundant 404 responses.
   env.allowLocalModels = false;
+  env.useBrowserCache = true;
   
-  _extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2") as typeof _extractor;
+  try {
+    _extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", {
+      quantized: true,
+      device: "webgpu",
+    }) as typeof _extractor;
+  } catch (e) {
+    console.warn("WebGPU not supported or failed to initialize, falling back to WASM/CPU backend:", e);
+    _extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", {
+      quantized: true,
+    }) as typeof _extractor;
+  }
   return _extractor!;
 }
 
@@ -146,9 +157,9 @@ export function ShaniGPT() {
     }
   }
 
-  // Preload the model on browser idle time (1.5 seconds after landing)
-  // This downloads and caches the model silently in the background, making
-  // subsequent user queries instantaneous.
+  // Preload the model immediately upon component mount.
+  // Because this component is lazy-loaded and only mounts when entering the viewport,
+  // this ensures preloading only triggers when the user is scrolled near the section.
   useEffect(() => {
     const timer = setTimeout(() => {
       if (typeof window !== "undefined") {
@@ -160,7 +171,7 @@ export function ShaniGPT() {
           warmUp(true);
         }
       }
-    }, 1500);
+    }, 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -258,7 +269,7 @@ export function ShaniGPT() {
       {/* Model loading banner */}
       {modelState === "loading" && !searching && showLoader && (
         <p className="mono mt-3 text-center text-xs text-muted-foreground/60 animate-pulse">
-          Loading ShaniGPT… (first-time model download, cached after this)
+          Still warming up, one sec... (first-time model download, cached after this)
         </p>
       )}
 
@@ -284,7 +295,7 @@ export function ShaniGPT() {
             <div className="mr-auto max-w-[85%] rounded-2xl rounded-tl-sm border border-ember/20 bg-background/60 px-4 py-2.5 text-muted-foreground">
               <span className="inline-flex items-center gap-2">
                 <span className="dot-live animate-pulse" />
-                {modelState === "loading" ? "Loading ShaniGPT…" : "Searching…"}
+                {modelState === "loading" ? "Still warming up, one sec..." : "Searching…"}
               </span>
             </div>
           )}
