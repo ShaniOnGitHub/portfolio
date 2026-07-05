@@ -1,4 +1,68 @@
+import { useState, useEffect } from "react";
 import { MapPin } from "lucide-react";
+
+function TerminalConsole() {
+  const [text, setText] = useState("");
+  const [emberText, setEmberText] = useState("");
+
+  useEffect(() => {
+    const fullLines = [
+      "$ boot --profile shani",
+      "  content ............ ok",
+      "  ai_engineering ..... ok",
+      "  sales_gtm .......... ok",
+      "  community .......... ok"
+    ];
+
+    let currentLineIdx = 0;
+    let currentCharIdx = 0;
+    let currentText = "";
+    let timer: NodeJS.Timeout;
+
+    function typeChar() {
+      if (currentLineIdx < fullLines.length) {
+        const line = fullLines[currentLineIdx];
+        if (currentCharIdx < line.length) {
+          currentText += line[currentCharIdx];
+          setText(currentText + (currentCharIdx === line.length - 1 ? "\n" : ""));
+          currentCharIdx++;
+          const char = line[currentCharIdx - 1];
+          const delay = char === "." ? 10 : char === " " ? 15 : 40;
+          timer = setTimeout(typeChar, delay);
+        } else {
+          currentLineIdx++;
+          currentCharIdx = 0;
+          timer = setTimeout(typeChar, 200);
+        }
+      } else {
+        const finalLine = "→ all layers online";
+        let finalCharIdx = 0;
+        let finalOutput = "";
+        
+        function typeFinal() {
+          if (finalCharIdx < finalLine.length) {
+            finalOutput += finalLine[finalCharIdx];
+            setEmberText(finalOutput);
+            finalCharIdx++;
+            timer = setTimeout(typeFinal, 55);
+          }
+        }
+        typeFinal();
+      }
+    }
+
+    timer = setTimeout(typeChar, 400);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <pre className="whitespace-pre-wrap text-xs leading-6 text-muted-foreground">
+      {text}
+      {emberText && <span className="text-ember">{emberText}</span>}
+      <span className="ml-0.5 inline-block h-3 w-1.5 -translate-y-[1px] animate-pulse bg-ember align-middle" />
+    </pre>
+  );
+}
 
 export function Hero() {
   return (
@@ -49,16 +113,7 @@ export function Hero() {
               <span className="h-2.5 w-2.5 rounded-full bg-ember" />
               <span className="ml-3 text-[10px] uppercase tracking-widest text-muted-foreground">session</span>
             </div>
-            <pre className="whitespace-pre-wrap text-xs leading-6 text-muted-foreground">
-{`$ boot --profile roshaan
-  content ............ ok
-  ai_engineering ..... ok
-  sales_gtm .......... ok
-  community .......... ok
-`}
-              <span className="text-ember">→ all layers online</span>
-              <span className="ml-0.5 inline-block h-3 w-1.5 -translate-y-[1px] animate-pulse bg-ember align-middle" />
-            </pre>
+            <TerminalConsole />
           </div>
         </div>
       </div>
