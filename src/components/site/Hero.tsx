@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { MapPin } from "lucide-react";
 
 function TerminalConsole() {
-  const [text, setText] = useState("");
+  const [lines, setLines] = useState<string[]>([]);
   const [emberText, setEmberText] = useState("");
 
   useEffect(() => {
@@ -16,50 +16,54 @@ function TerminalConsole() {
 
     let currentLineIdx = 0;
     let currentCharIdx = 0;
-    let currentText = "";
     let timer: NodeJS.Timeout;
 
-    function typeChar() {
+    function type() {
       if (currentLineIdx < fullLines.length) {
         const line = fullLines[currentLineIdx];
-        if (currentCharIdx < line.length) {
-          currentText += line[currentCharIdx];
-          setText(currentText + (currentCharIdx === line.length - 1 ? "\n" : ""));
+        if (currentCharIdx <= line.length) {
+          setLines(prev => {
+            const copy = [...prev];
+            copy[currentLineIdx] = line.slice(0, currentCharIdx);
+            return copy;
+          });
           currentCharIdx++;
           const char = line[currentCharIdx - 1];
-          const delay = char === "." ? 10 : char === " " ? 15 : 40;
-          timer = setTimeout(typeChar, delay);
+          const delay = char === "." ? 5 : char === " " ? 10 : 25;
+          timer = setTimeout(type, delay);
         } else {
           currentLineIdx++;
           currentCharIdx = 0;
-          timer = setTimeout(typeChar, 200);
+          timer = setTimeout(type, 80);
         }
       } else {
         const finalLine = "→ all layers online";
         let finalCharIdx = 0;
-        let finalOutput = "";
         
         function typeFinal() {
-          if (finalCharIdx < finalLine.length) {
-            finalOutput += finalLine[finalCharIdx];
-            setEmberText(finalOutput);
+          if (finalCharIdx <= finalLine.length) {
+            setEmberText(finalLine.slice(0, finalCharIdx));
             finalCharIdx++;
-            timer = setTimeout(typeFinal, 55);
+            timer = setTimeout(typeFinal, 35);
           }
         }
-        typeFinal();
+        timer = setTimeout(typeFinal, 80);
       }
     }
 
-    timer = setTimeout(typeChar, 400);
+    timer = setTimeout(type, 200);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <pre className="whitespace-pre-wrap text-xs leading-6 text-muted-foreground">
-      {text}
-      {emberText && <span className="text-ember">{emberText}</span>}
-      <span className="ml-0.5 inline-block h-3 w-1.5 -translate-y-[1px] animate-pulse bg-ember align-middle" />
+      {lines.map((line, idx) => (
+        <div key={idx}>{line}</div>
+      ))}
+      <div>
+        {emberText && <span className="text-ember">{emberText}</span>}
+        <span className="ml-0.5 inline-block h-3 w-1.5 -translate-y-[1px] animate-pulse bg-ember align-middle" />
+      </div>
     </pre>
   );
 }
