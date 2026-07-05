@@ -1,0 +1,134 @@
+[
+  {
+    "question": "Who is Shani? Who is Roshaan Ali Shah? tell me about Shani whats this guy about",
+    "answer": "Roshaan Ali Shah, known as Shani, is a final-year Software Engineering student at SZABIST Islamabad. He works across three domains: AI engineering, creative content strategy, and sales/growth. He is based in Islamabad, Pakistan."
+  },
+  {
+    "question": "What makes Shani different from other AI engineers? sales or engineering, which one is he? content creator or engineer?",
+    "answer": "Shani combines technical AI engineering with real sales and content experience: he's built RAG systems and also personally sold an AI product to UK dental clinics through cold outreach. That combination means he can build a product and also explain and sell it, not just ship code."
+  },
+  {
+    "question": "Is Shani looking for a job? Is Shani looking for work? why should i hire him",
+    "answer": "Yes, Shani is open to AI engineering roles, internships, and content/growth collaborations. He brings founder-level experience, sales drive, content capability, and a solid generative AI engineering stack to a team."
+  },
+  {
+    "question": "Does Shani have industry work experience, or just academic projects?",
+    "answer": "Both. Academically, he's completing his final-year project SmartExam. Outside school, he's co-founded two companies: DentraFlow and Frequenzy, and led social content at GDG on Campus SZABIST, giving him real client-facing and team experience alongside his technical projects."
+  },
+  {
+    "question": "What programming languages does Shani know? does he no python? does he know python?",
+    "answer": "Shani's projects are primarily built with Python (FastAPI) for backend AI systems and use PostgreSQL with pgvector for data and vector storage. His portfolio site itself is built with modern web tooling (React/TypeScript-based)."
+  },
+  {
+    "question": "Can Shani work with a team, or does he only work solo? is he good with clients?",
+    "answer": "Shani co-founded two companies, meaning he is highly comfortable working with clients, co-founders, and small teams on shared products. He also leads community content strategy at GDG on Campus SZABIST."
+  },
+  {
+    "question": "Does Shani have experience with cloud platforms?",
+    "answer": "Shani's current projects use PostgreSQL with pgvector for vector storage and FastAPI for backend services. Specific cloud deployment experience isn't detailed here: reach out directly for specifics on his infrastructure experience."
+  },
+  {
+    "question": "What is SmartExam? What's he working on for his degree?",
+    "answer": "SmartExam is Shani's final-year project: an AI-assisted online exam proctoring platform. He owns the Student Portal and Notifications modules and recently completed its Final Defense."
+  },
+  {
+    "question": "Why did Shani switch from content creation to AI engineering?",
+    "answer": "Shani didn't fully switch: he layered AI engineering on top of his content and growth background rather than replacing it. He started teaching himself the AI automation stack because he wanted to build the systems he was already pitching to clients, not just sell them."
+  },
+  {
+    "question": "What is Shani studying? Is he a student? What school does he go to?",
+    "answer": "Shani is a final-year Software Engineering student at SZABIST Islamabad."
+  },
+  {
+    "question": "Does Shani have any leadership experience?",
+    "answer": "Yes. He's Social Media Lead at GDG on Campus SZABIST, and he co-founded both DentraFlow and Frequenzy, meaning he's held founder-level responsibility in two companies."
+  },
+  {
+    "question": "What is Shani's biggest technical project? what's he built recently",
+    "answer": "His multi-tenant AI support automation system, built with FastAPI, PostgreSQL/pgvector, and Gemini, is his most significant technical build: it's his primary technical portfolio piece."
+  },
+  {
+    "question": "Does Shani have any freelance or client work experience? tell me about the dental thing",
+    "answer": "Yes: through DentraFlow, Shani has direct client acquisition experience, including cold calling UK dental clinics and managing the full sales process from outreach to close."
+  },
+  {
+    "question": "What kind of content has Shani created?",
+    "answer": "Shani has written viral short-form scripts for content creators (with a focus on TikTok-style hooks and pacing), grown an online community past 1,000 members organically, and led social media strategy for GDG on Campus SZABIST."
+  },
+  {
+    "question": "Is Shani available for internships?",
+    "answer": "Yes, Shani is open to internship opportunities, particularly in AI engineering and content/growth roles. Reach him at roshaanali128@gmail.com."
+  },
+  {
+    "question": "What is Shani's approach to problem-solving?",
+    "answer": "Shani tends to prefer plain-language, scenario-based approaches over jargon or memorization: he likes to understand how something actually works in practice before relying on it."
+  },
+  {
+    "question": "Does Shani work better with AI tools or from scratch?",
+    "answer": "Shani actively builds with AI tools as part of his workflow: his portfolio itself includes an AI-powered chatbot he built, and he's comfortable using AI-assisted development tools alongside hands-on engineering."
+  },
+  {
+    "question": "What industries has Shani worked in? any startups? Has he started any companies?",
+    "answer": "Shani co-founded two companies: DentraFlow (healthcare/dental software) and Frequenzy (events/entertainment). He also has experience in education technology (SmartExam) and developer communities (GDG on Campus)."
+  },
+  {
+    "question": "Does Shani have experience with databases? What databases does he use?",
+    "answer": "Yes — Shani works with PostgreSQL, specifically using the pgvector extension for vector similarity search in his AI/RAG projects."
+  },
+  {
+    "question": "What's Shani's long-term career goal?",
+    "answer": "Specific long-term goals aren't detailed here: reach out to Shani directly at roshaanali128@gmail.com for that conversation."
+  },
+  {
+    "question": "Has Shani won any awards or competitions?",
+    "answer": "Shani submitted a short political film, \"The Marionette,\" to the ImagineArt AI filmmaking competition, though it was not shortlisted. Beyond that, no specific awards are listed here."
+  },
+  {
+    "question": "Does Shani have a resume?",
+    "answer": "You can find more details and a downloadable résumé on Shani's portfolio site."
+  },
+  {
+    "question": "What does Shani do for fun / outside of work?",
+    "answer": "Specific hobbies aren't detailed in this knowledge base: feel free to ask Shani directly."
+  },
+  {
+    "question": "Can Shani build a chatbot like this one for my company?",
+    "answer": "Shani has hands-on experience building RAG-based chatbots, including this client-side one and other document-based RAG systems. Reach out at roshaanali128@gmail.com to discuss a project."
+  },
+  {
+    "question": "What languages does Shani speak?",
+    "answer": "Language details aren't specified in this knowledge base: reach out to Shani directly for that information."
+  },
+  {
+    "question": "Is this chatbot open source? Can I see the code?",
+    "answer": "Shani's code is available on GitHub at github.com/ShaniOnGitHub, where you can find his his projects, though not all repos may be public."
+  },
+  {
+    "question": "How can I contact Shani? What is his email or LinkedIn? whats his linkedin?",
+    "answer": "Shani's code is on GitHub at github.com/ShaniOnGitHub. He can be reached by email at roshaanali128@gmail.com, or on LinkedIn at linkedin.com/in/roshaan-ali-shah."
+  },
+  {
+    "question": "How old is Shani? What is his age? how old are you",
+    "answer": "Age isn't listed in this knowledge base: feel free to ask Shani directly."
+  },
+  {
+    "question": "What are Shani's salary expectations? What does he charge? what's his rate",
+    "answer": "Compensation and rate details aren't listed here: reach out to Shani directly at roshaanali128@gmail.com to discuss."
+  },
+  {
+    "question": "When is Shani available to start? What's his notice period? when can he start",
+    "answer": "Availability specifics aren't listed here: reach out to Shani directly at roshaanali128@gmail.com to discuss timing."
+  },
+  {
+    "question": "Is Shani open to relocation or remote work? Does he need a visa?",
+    "answer": "Relocation, remote work preferences, and visa status aren't detailed here: reach out to Shani directly for that conversation."
+  },
+  {
+    "question": "What is Shani's relationship status? Is he married? is he single",
+    "answer": "That information isn't relevant to this portfolio and isn't listed here."
+  },
+  {
+    "question": "What religion/ethnicity/nationality is Shani?",
+    "answer": "Shani is based in Islamabad, Pakistan. Other personal details aren't covered in this knowledge base."
+  }
+]

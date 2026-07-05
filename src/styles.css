@@ -1,0 +1,134 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ember: var(--ember);
+  --color-ember-glow: var(--ember-glow);
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.16 0.008 60);
+  --foreground: oklch(0.94 0.015 80);
+  --card: oklch(0.19 0.01 60);
+  --card-foreground: oklch(0.94 0.015 80);
+  --popover: oklch(0.19 0.01 60);
+  --popover-foreground: oklch(0.94 0.015 80);
+  --primary: oklch(0.68 0.19 42);
+  --primary-foreground: oklch(0.15 0.01 60);
+  --secondary: oklch(0.24 0.01 60);
+  --secondary-foreground: oklch(0.94 0.015 80);
+  --muted: oklch(0.22 0.008 60);
+  --muted-foreground: oklch(0.62 0.015 70);
+  --accent: oklch(0.68 0.19 42);
+  --accent-foreground: oklch(0.15 0.01 60);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.28 0.01 60 / 60%);
+  --input: oklch(0.24 0.01 60);
+  --ring: oklch(0.68 0.19 42);
+  --ember: oklch(0.68 0.19 42);
+  --ember-glow: oklch(0.75 0.17 55);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 80% -10%, oklch(0.68 0.19 42 / 0.08), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, oklch(0.68 0.19 42 / 0.05), transparent 60%);
+    background-attachment: fixed;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    z-index: 1;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--color-muted-foreground);
+  text-transform: lowercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@utility mono {
+  font-family: var(--font-mono);
+}
+
+@utility ember-text {
+  color: var(--color-ember);
+  text-shadow: 0 0 24px oklch(0.68 0.19 42 / 0.35);
+}
+
+@utility dot-live {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-ember);
+  box-shadow: 0 0 12px var(--color-ember);
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@utility fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
