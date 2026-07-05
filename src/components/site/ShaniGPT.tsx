@@ -188,7 +188,7 @@ export function ShaniGPT() {
         </p>
         <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Ask me anything.</h2>
         <p className="mono mt-2 text-xs text-muted-foreground/60">
-          Runs 100% in your browser — no data sent anywhere.
+          Runs 100% in your browser: all layers online.
         </p>
       </div>
 
