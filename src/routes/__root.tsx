@@ -73,25 +73,33 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Roshaan Ali: AI Engineer, Content Strategist, Builder" },
+      { title: "Roshaan Ali Shah — AI Engineer & Builder" },
       {
         name: "description",
         content:
-          "Roshaan Ali Shah: AI engineer, content strategist, and builder. AI systems, viral scripts, and startups shipped end to end.",
+          "Roshaan Ali Shah — AI Engineer & Builder crafting advanced AI systems, client-side RAG, and community growth. Shipped end-to-end.",
       },
       { name: "author", content: "Roshaan Ali Shah" },
-      { property: "og:title", content: "Roshaan Ali: AI Engineer & Builder" },
+      { property: "og:title", content: "Roshaan Ali Shah — AI Engineer & Builder" },
       {
         property: "og:description",
         content:
-          "I build things people watch, and systems people use. AI engineering, content strategy, and sales.",
+          "Roshaan Ali Shah — AI Engineer & Builder crafting advanced AI systems, client-side RAG, and community growth. Shipped end-to-end.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Roshaan Ali Shah — AI Engineer & Builder" },
+      {
+        name: "twitter:description",
+        content:
+          "Roshaan Ali Shah — AI Engineer & Builder crafting advanced AI systems, client-side RAG, and community growth. Shipped end-to-end.",
+      },
+      { name: "twitter:image", content: "/og-image.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
