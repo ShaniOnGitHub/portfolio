@@ -23,13 +23,14 @@ export const journeyEntries: JourneyEntry[] = [
   {
     year: "2025",
     narrative:
-      "This is where I started pointing my content and community skills toward something more technical. I kept growing what I'd started and wrote scripts for creators that consistently hit viral numbers. I also co-founded Frequenzy, an events company here in Islamabad. Behind the scenes, I started teaching myself the AI automation stack: FastAPI, PostgreSQL, vector databases, because I wanted to be able to build the systems I kept pitching to clients, not just sell them.",
+      "This is where I started pointing my content and community skills toward something more technical. I worked as a Prompt Engineer at Retrax, engineering prompt systems to automate content creation workflows. I also co-founded Frequenzy, an events company here in Islamabad. Behind the scenes, I started teaching myself the AI automation stack: FastAPI, PostgreSQL, vector databases, because I wanted to be able to build the systems I kept pitching to clients, not just sell them.",
     mockups: [
       { title: "Script analytics", caption: "Retention curves · viral hooks" },
       { title: "Early automations", caption: "FastAPI · pgvector" },
     ],
     achievements: [
       "Wrote viral short-form scripts for creators",
+      "Worked as a Prompt Engineer at Retrax, automating content creation workflows",
       "Co-founded Frequenzy (events company)",
       "Started building AI automation systems (FastAPI, PostgreSQL/pgvector)",
     ],

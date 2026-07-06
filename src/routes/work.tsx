@@ -45,6 +45,11 @@ export const Route = createFileRoute("/work")({
         property: "og:description",
         content: "The full path: roles, companies, and community work.",
       },
+      { name: "twitter:title", content: "Work: Roshaan Ali" },
+      {
+        name: "twitter:description",
+        content: "The full path: roles, companies, and community work.",
+      },
     ],
   }),
   component: WorkPage,

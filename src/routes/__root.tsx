@@ -118,10 +118,39 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const router = useRouter();
+  const pathname = router.state.location.pathname;
+  const cleanPath = pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+  const canonicalUrl = `https://roshaandev.vercel.app${cleanPath}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Roshaan Ali Shah",
+    "alternateName": "Shani",
+    "url": "https://roshaandev.vercel.app/",
+    "jobTitle": "AI Engineer",
+    "description": "Final-year Software Engineering student and AI engineer building RAG systems, multi-model AI assistants, and AI automation products.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Islamabad",
+      "addressCountry": "PK"
+    },
+    "sameAs": [
+      "https://github.com/ShaniOnGitHub",
+      "https://linkedin.com/in/roshaan-ali-shah"
+    ]
+  };
+
   return (
     <html lang="en" className="dark">
       <head>
         <HeadContent />
+        <link rel="canonical" href={canonicalUrl} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         {children}

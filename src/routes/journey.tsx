@@ -18,6 +18,12 @@ export const Route = createFileRoute("/journey")({
         content:
           "From writing scripts and growing communities to shipping AI systems end to end: the timeline.",
       },
+      { name: "twitter:title", content: "My Build Log: Roshaan Ali" },
+      {
+        name: "twitter:description",
+        content:
+          "From writing scripts and growing communities to shipping AI systems end to end: the timeline.",
+      },
     ],
   }),
   component: JourneyPage,
