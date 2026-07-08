@@ -27,14 +27,23 @@ function ShaniGPTLazyWrapper() {
           observer.disconnect();
         }
       },
-      { rootMargin: "300px" } // Load the chunk slightly before the section is scrolled into view
+      { rootMargin: "600px" } // Load the chunk earlier
     );
 
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect();
+    // Idle-time fallback: load the model after 3 seconds of page load even if not scrolled yet
+    const idleTimer = setTimeout(() => {
+      setShouldLoad(true);
+      observer.disconnect();
+    }, 3000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(idleTimer);
+    };
   }, []);
 
   return (
@@ -42,7 +51,7 @@ function ShaniGPTLazyWrapper() {
       {shouldLoad ? (
         <Suspense fallback={<div className="flex min-h-[250px] items-center justify-center text-xs text-muted-foreground/60 mono">Initializing chatbot...</div>}>
           <LazyShaniGPT />
-        </Suspense>
+         </Suspense>
       ) : null}
     </div>
   );

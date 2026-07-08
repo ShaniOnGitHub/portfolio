@@ -50,17 +50,24 @@ async function getExtractor() {
   env.allowLocalModels = false;
   env.useBrowserCache = true;
   
-  try {
-    _extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", {
-      quantized: true,
-      device: "webgpu",
-    }) as typeof _extractor;
-  } catch (e) {
-    console.warn("WebGPU not supported or failed to initialize, falling back to WASM/CPU backend:", e);
-    _extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", {
-      quantized: true,
-    }) as typeof _extractor;
+  const hasWebGPU = typeof navigator !== "undefined" && !!navigator.gpu;
+  
+  if (hasWebGPU) {
+    try {
+      _extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", {
+        quantized: true,
+        device: "webgpu",
+      }) as typeof _extractor;
+      return _extractor!;
+    } catch (e) {
+      console.warn("WebGPU initialization failed, falling back to WASM/CPU backend:", e);
+    }
   }
+
+  _extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", {
+    quantized: true,
+  }) as typeof _extractor;
+  
   return _extractor!;
 }
 
